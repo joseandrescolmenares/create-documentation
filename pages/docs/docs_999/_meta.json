@@ -1,0 +1,52 @@
+{
+  "index": "Introducción",
+  "installation": {
+    "title": "Instalación",
+    "type": "folder",
+    "steps": {
+      "environmentSetup": "Configuración del Entorno",
+      "dependencies": "Instalación de Dependencias",
+      "configuration": "Configuración Inicial"
+    }
+  },
+  "usage": {
+    "title": "Uso Básico",
+    "type": "folder",
+    "topics": {
+      "basicCommands": "Comandos Básicos",
+      "fileHandling": "Manejo de Archivos",
+      "userPermissions": "Permisos de Usuario"
+    }
+  },
+  "advanced": {
+    "title": "Uso Avanzado",
+    "type": "folder",
+    "topics": {
+      "scripting": "Automatización y Scripting",
+      "performanceTuning": "Ajuste de Rendimiento",
+      "securityEnhancements": "Mejoras de Seguridad"
+    }
+  },
+  "troubleshooting": {
+    "title": "Resolución de Problemas",
+    "type": "folder",
+    "issues": {
+      "commonErrors": "Errores Comunes",
+      "networkIssues": "Problemas de Red",
+      "logsAnalysis": "Análisis de Logs"
+    }
+  },
+  "additionalResources": {
+    "title": "Recursos Adicionales",
+    "type": "folder",
+    "links": {
+      "documentation": "Documentación Oficial",
+      "community": "Comunidad y Foros",
+      "thirdPartyTools": "Herramientas de Terceros"
+    }
+  },
+  "customSection": {
+    "title": "Sección Personalizada",
+    "type": "folder"
+  }
+}

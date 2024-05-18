@@ -29,6 +29,20 @@ async function generateDocumentation(userId,) {
     const documentationPrompt =
       `Genera la documentación para un proyecto incluyendo un index como  introducción y varias secciones con temas. Proporciona el contenido en formato json donde cada clave es el nombre de una sección o tema, y el valor es el contenido en formato Markdown.
       
+      ejemplo de respuesta:
+
+      {
+        "index": "# Introducción\nEsta es la página de introducción.",
+        "advanced": {
+            "index": "# Sección Avanzada\nEsta es la sección avanzada.",
+            "topic1": "# Tema 1\nDetalles sobre el tema 1.",
+            "topic2": "# Tema 2\nDetalles sobre el tema 2."
+        },
+        "customSection": {
+            "index": "# Sección Personalizada\nDetalles de la sección personalizada.",
+            "subtopic1": "# Subtema 1\nDetalles del subtema 1."
+        }
+    }
        `;
   
     const metaPrompt =
