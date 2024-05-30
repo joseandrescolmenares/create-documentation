@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@langchain/community": "^0.2.4",
     "fs": "^0.0.1-security",
+    "groq-sdk": "^0.4.0",
+    "ignore": "^5.3.1",
+    "langchain": "^0.2.3",
+    "langsmith": "^0.1.30",
     "next": "14.2.3",
     "nextra": "^2.13.4",
     "nextra-theme-docs": "^2.13.4",
