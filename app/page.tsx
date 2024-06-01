@@ -7,7 +7,7 @@ export default function Home() {
     const [message, setMessage] = useState('');
 
     const handleCreateMeta = async () => {
-        const response = await fetch('/api/save-meta', {
+        const response = await fetch('/api/generate', {
             method: 'GET',
         });
 
