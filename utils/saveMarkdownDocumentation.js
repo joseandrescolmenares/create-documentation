@@ -7,9 +7,8 @@ const { generateDocumentationPrompt, generateMetaPrompt } = require("./promps.js
 
 async function generateDocumentation(userId, repo) {
   // Prompt para generar la documentación
-
   const documentationResponse = await callLLM(generateDocumentationPrompt(repo));
-  console.log(documentationResponse,"document, reponse")
+
   const documentation = JSON.parse(documentationResponse);
 
   const metaResponse = await callLLM(generateMetaPrompt(documentation));
@@ -37,10 +36,12 @@ async function generateDocumentation(userId, repo) {
         }
         saveMarkdownFiles(subDir, content);
       } else if (typeof content === 'string') {
+       
         const filePath = path.join(baseDir, `${filename}.mdx`);
         fs.writeFileSync(filePath, content);
       }
     }
+  
   }
 
   // Guardar la documentación

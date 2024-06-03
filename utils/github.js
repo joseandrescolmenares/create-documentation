@@ -2,6 +2,7 @@ const {
   GithubRepoLoader,
 } = require("@langchain/community/document_loaders/web/github");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { scrapingGithubPrompt } = require("./promps");
 
 export async function scrapingGithub(url) {
   try {
@@ -34,20 +35,9 @@ export async function scrapingGithub(url) {
     // Obtener el modelo específico
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro", });
 
-    const prompt = `
-    
-    Lea detenidamente el repositorio y resuma cada parte del mismo, identificando los endpoints implicados y todas las partes del repositorio. y expliqeu cada parte del repositorio, detlladamente tenga en cuenta que esta creando una documentacion del repositorio y debe ser detallado y debe explicar muy bien todas las partes del repositorio para tener una documentacion clara
-
-  En primer lugar, describe de qué trata el proyecto y describe todos los puntos finales del repositorio. Desglosa los puntos clave, identifica los aspectos más importantes del proyecto e intenta explicarlos de la mejor manera posible.
 
 
-### Repositorio:  
-    ${repo}
-
-
-    `;
-
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(scrapingGithubPrompt(repo));
     const text = result.response.text();
 
     // Retornar la respuesta en formato JSON
