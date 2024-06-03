@@ -6,12 +6,23 @@ const { scrapingGithubPrompt } = require("./promps");
 
 export async function scrapingGithub(url) {
   try {
-
     const loader = new GithubRepoLoader(url, {
       branch: "main",
       recursive: true,
       processSubmodules: true,
       unknown: "warn",
+      ignorePaths: [
+        "package-lock.json",
+        ".gitignore",
+        "tailwind.config.js",
+        "postcss.config.js",
+        "vite.config.js",
+        "next.config.js",
+        "yarn.lock",
+        "node_modules",
+        "package.json",
+        "*.svg"
+      ],
     });
 
     const docs = await loader.load();
