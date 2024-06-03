@@ -1,14 +1,13 @@
-export const generateDocumentationPrompt = (repo) => `
-Carefully read the repository provided in JSON format, summarize each part, identifying the endpoints involved and all relevant sections of the repository. Your task is to create high-level documentation, providing clear and detailed explanations to ensure thorough understanding.
+export const generateDocumentationPrompt = (repo) => `Carefully read the repository provided in JSON format, where each entry includes the path and the content of the files and folders. Summarize each part, identifying the endpoints involved and all relevant sections of the repository. Your task is to create high-level documentation, providing clear and detailed explanations to ensure thorough understanding.
 
-1.	Project Overview:
-	•	Describe the purpose and scope of the project. Explain what the project aims to achieve and its primary functionalities.
-	2.	Endpoints:
-	•	Identify and describe all endpoints in the repository. For each endpoint, provide details on its purpose, inputs, outputs, and any other relevant information. Include code examples where appropriate.
-	3.	Key Components:
-	•	Break down the key components of the repository. Identify the most important parts of the project and explain them in detail. This may include modules, classes, functions, or any significant pieces of code. Include code examples to illustrate functionality.
-	4.	Detailed Explanations:
-	•	For each part of the repository, provide a high-level explanation. Describe its functionality, how it fits into the overall project, and any dependencies it may have. Include any other information that will help in understanding that part of the project. Provide examples where applicable.
+1. Project Overview:
+   • Describe the purpose and scope of the project. Explain what the project aims to achieve and its primary functionalities.
+2. Endpoints:
+   • Identify and describe all endpoints in the repository. For each endpoint, provide details on its purpose, inputs, outputs, and any other relevant information. Include code examples where appropriate.
+3. Key Components:
+   • Break down the key components of the repository. Identify the most important parts of the project and explain them in detail. This may include modules, classes, functions, or any significant pieces of code. Include code examples to illustrate functionality.
+4. Detailed Explanations:
+   • For each part of the repository, provide a high-level explanation. Describe its functionality, how it fits into the overall project, and any dependencies it may have. Include any other information that will help in understanding that part of the project. Provide examples where applicable.
 
 When providing your responses, use the following JSON format:
 {
@@ -62,32 +61,116 @@ For example:
 
 Ensure that the names of the topics or titles do not contain spaces (replace spaces with hyphens) and do not include / or file extensions like .js or .ts (replace / with - in the keys).
 
+When creating examples or including code snippets in the documentation, ensure that the code is properly formatted according to the language. Use the appropriate code block syntax for each language. For example:
+
+- For JavaScript:
+\`\`\`js
+console.log("Hello, world!");
+\`\`\`
+
+- For Python:
+\`\`\`python
+print("Hello, world!")
+\`\`\`
+
+- For HTML:
+\`\`\`html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello, world!</title>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+</body>
+</html>
+\`\`\`
+
+Always wrap the code within triple backticks followed by the language identifier to ensure proper syntax highlighting in the documentation. Remember, the examples should be representative and relevant to the functionality described.
+
 Repository:
 
 ${repo}
 
-`;
+Descriptions can be generated in markdown format.
+
+`
 
 export const generateMetaPrompt = (documentation) => `
-  Genera una configuración en formato JSON para la siguiente documentación proporcionada. Incluye títulos para cada sección y tema, y cualquier configuración adicional necesaria para Nextra.
+Generate a configuration in JSON format for the provided documentation. Include titles for each section and topic, and any additional configuration necessary for Nextra. Follow the guidelines below:
 
-  Documentación:
+1. **Title Configuration**:
+   - For each section, provide a descriptive title.
+   - For each topic within a section, provide a detailed title.
 
-  ${documentation}
+2. **Page Structure**:
+   - Define the structure of the documentation hierarchically.
+   - Include sections and nested topics with clear paths.
 
-  Ejemplo de respuesta:
+3. **Additional Configuration**:
+   - Include any relevant metadata or settings required by Nextra.
 
-  {
-    "index": "Introducción",
-    "advanced": {
-        "title": "Sección Avanzada",
-        "type": "folder"
+Use the following JSON format:
+
+{
+  "title": "Project Documentation",
+  "sections": [
+    {
+      "title": "Introduction",
+      "topics": [
+        {
+          "title": "Overview",
+          "path": "introduction/overview",
+          "description": "Overview of the project and its goals."
+        },
+        {
+          "title": "Getting Started",
+          "path": "introduction/getting-started",
+          "description": "Instructions to get started with the project."
+        }
+      ]
     },
-    "customSection": {
-        "title": "Sección Personalizada",
-        "type": "folder"
+    {
+      "title": "API Endpoints",
+      "topics": [
+        {
+          "title": "Authentication",
+          "path": "api/authentication",
+          "description": "Endpoints related to user authentication."
+        },
+        {
+          "title": "Data Management",
+          "path": "api/data-management",
+          "description": "Endpoints for managing project data."
+        }
+      ]
+    },
+    {
+      "title": "Components",
+      "topics": [
+        {
+          "title": "UI Components",
+          "path": "components/ui-components",
+          "description": "Details about the UI components used in the project."
+        },
+        {
+          "title": "Backend Services",
+          "path": "components/backend-services",
+          "description": "Description of backend services and their functionalities."
+        }
+      ]
     }
+  ],
+  "settings": {
+    "theme": "dark",
+    "sidebarDepth": 2
   }
+}
+
+Ensure the JSON is well-structured, clear, and includes all necessary titles and configurations for Nextra.
+
+Documentation:
+${documentation}
 `;
 
 export const scrapingGithubPrompt = (repo) => `
@@ -108,30 +191,9 @@ You are an engineer specialized in generating detailed and accurate documentatio
 	•	The value should be a detailed description of the part, including examples where applicable.
 	5.	Combine related descriptions:
 	•	If several descriptions are related to the same topic or component, nest them under a common key.
-	6.	Example output:
 
-    {
-        "index": "High-level overview of the repository, describing its purpose and main functionalities.",
-        "main-endpoint": {
-          "description": "Description of the main endpoint, its functionality, and usage.",
-          "example": "Code example for the main endpoint"
-        },
-        "authentication": {
-          "login-endpoint": {
-            "description": "Description of the login endpoint, its parameters, and responses.",
-            "example": "Code example for the login endpoint"
-          },
-          "register-endpoint": {
-            "description": "Description of the register endpoint, its parameters, and responses.",
-            "example": "Code example for the register endpoint"
-          }
-        },
-        "database-configuration": {
-          "description": "Details about database configuration, including connection settings and schema information.",
-          "example": "Code example for database configuration"
-        }
-      }
-      Important Guidelines:
+ 
+    ### Important Guidelines:
 
 	•	Ensure the documentation is clear, concise, and easy to understand.
 	•	Use descriptive names for keys without spaces, replacing spaces with hyphens.
@@ -142,4 +204,4 @@ You are an engineer specialized in generating detailed and accurate documentatio
 
 ${repo}
 
-`
+`;
