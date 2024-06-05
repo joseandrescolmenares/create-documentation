@@ -26,12 +26,12 @@ Sigue estos pasos para instalar y configurar la herramienta en tu entorno local:
 
    npm run dev
 
-Contribuciones
+## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si deseas colaborar, por favor sigue estos pasos:
 
-	1.	Haz un fork de este repositorio.
-	2.	Crea una rama nueva:
+	1. Haz un fork de este repositorio.
+	2. Crea una rama nueva:
  
     git checkout -b mi-nueva-funcionalidad
 
