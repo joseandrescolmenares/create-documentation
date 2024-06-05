@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const { callLLM } = require('./ai');
-const { Fragment } = require('react');
 const { generateDocumentationPrompt, generateMetaPrompt } = require("./promps.js")
 
 async function generateDocumentation(userId, repo) {

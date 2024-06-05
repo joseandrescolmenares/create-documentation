@@ -3,8 +3,8 @@ import { scrapingGithub } from "../../../utils/github";
 
 export async function GET() {
     const userId = 999; 
-    const repo = await scrapingGithub("https://github.com/joseandrescolmenares/Challege")
+    const repo = await scrapingGithub("https://github.com/joseandrescolmenares/create-documentation")
     console.log(repo),"repor"
-    // const data = await generateDocumentation(userId,repo)
-  return Response.json({ status: repo});
+    const data = await generateDocumentation(userId,repo)
+  return Response.json({ status: data});
 }

@@ -17,11 +17,12 @@ export async function scrapingGithub(url) {
         "tailwind.config.js",
         "postcss.config.js",
         "vite.config.js",
-        "next.config.js",
         "yarn.lock",
         "node_modules",
         "package.json",
-        "*.svg"
+        "*.svg",
+        "next/core-web-vitals",
+        ".eslintrc.json"
       ],
     });
 
