@@ -1,0 +1,31 @@
+### Activity Model
+
+The activityModel.js file defines the model for activities and provides a method to obtain the list of available activities.
+
+**Example:**
+
+```javascript
+const chatactivity = require("../../utils/chatActivity");
+
+module.exports = {
+  getActivity: () => {
+    return chatactivity;
+  },
+};
+```
+
+### Chat Model
+
+The chatModel.js file defines the model for chat interactions and provides a method to send the request to the language model.
+
+**Example:**
+
+```javascript
+const chat = require("../../ai/chat");
+
+module.exports = {
+  chatActivity: async (body) => {
+    return await chat(body);
+  },
+};
+```

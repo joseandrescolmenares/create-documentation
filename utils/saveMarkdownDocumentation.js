@@ -7,12 +7,14 @@ async function generateDocumentation(userId, repo) {
 
   const documentationResponse = await callLLM(generateDocumentationPrompt(repo));
 
+  console.log(documentationResponse,"generated documentation")
+
   const documentation = JSON.parse(documentationResponse);
 
   const metaResponse = await callLLM(generateMetaPrompt(documentation));
   const metaConfig = JSON.parse(metaResponse);
 
-  const userDocsDir = path.join(process.cwd(), 'pages/docs', `docs_999`);
+  const userDocsDir = path.join(process.cwd(), 'pages/docs', `docs_${userId}`);
 
   if (!fs.existsSync(userDocsDir)) {
     fs.mkdirSync(userDocsDir, { recursive: true });
@@ -39,15 +41,15 @@ async function generateDocumentation(userId, repo) {
 
   saveMarkdownFiles(userDocsDir, documentation);
 
-  const metaPath = path.join(userDocsDir, '_meta.json');
-  fs.writeFileSync(metaPath, JSON.stringify(metaConfig, null, 2));
+  // const metaPath = path.join(userDocsDir, '_meta.json');
+  // fs.writeFileSync(metaPath, JSON.stringify(metaConfig, null, 2));
 
   const indexFilePath = path.join(userDocsDir, 'index.mdx');
   if (!fs.existsSync(indexFilePath)) {
     fs.writeFileSync(indexFilePath, ''); 
   }
 
-  return { documentation, metaConfig };
+  return { documentation };
 }
 
 module.exports = { generateDocumentation };

@@ -1,0 +1,33 @@
+### Activity Controller
+
+The activityController.js file manages requests related to activities. It handles fetching the list of available activities through the `getActivity` function.
+
+**Example:**
+
+```javascript
+const activityService = require('../services/activityService');
+
+module.exports = {
+  getActivity: (req, res) => {
+    const activitys = activityService.getActivity();
+    res.json(activitys);
+  },
+};
+```
+
+### Chat Controller
+
+The chatController.js file processes user chat requests and interacts with the AI model to generate responses through the `chatActivity` function.
+
+**Example:**
+
+```javascript
+const activityService = require("../services/chatServices");
+
+module.exports = {
+  chatActivity: async (req, res) => {
+    const chatResponse = activityService.chatActivity(req.body);
+    res.json(await chatResponse);
+  },
+};
+```

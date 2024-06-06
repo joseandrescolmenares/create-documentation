@@ -21,8 +21,14 @@ export async function scrapingGithub(url) {
         "node_modules",
         "package.json",
         "*.svg",
+        "*jpg",
         "next/core-web-vitals",
-        ".eslintrc.json"
+        ".eslintrc.json",
+        "components.json",
+        "database.types.ts",
+        "next.config.js",
+        "tsconfig.json"
+        
       ],
     });
 
@@ -41,7 +47,8 @@ export async function scrapingGithub(url) {
 
     const genAI = new GoogleGenerativeAI(process.env.API_KEY_GEMINIC);
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro", });
+
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const result = await model.generateContent(scrapingGithubPrompt(repo));
     const text = result.response.text();
