@@ -7,7 +7,6 @@ import { Button } from "./components/ui/button";
 import { Boxes } from "./components/ui/background-boxes";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { AlertDestructive } from "./components/AlertDestructive";
 import { Toaster, toast } from "sonner";
 
 export default function Home() {
@@ -39,10 +38,12 @@ export default function Home() {
 
       if (result.status === 200) {
         router.push(`/docs/docs_${data?.userId}`);
-        setIsLoading(false);
+        
       }
     } catch (error) {
       console.error("Error generating documentation:", error);
+      setIsLoading(false);
+      toast.error("Error generating documentation:");
     }
   };
 
@@ -211,6 +212,4 @@ function PuzzleIcon(props) {
     </svg>
   );
 }
-function isValidGitHubUrl(newUrl: any) {
-  throw new Error("Function not implemented.");
-}
+
