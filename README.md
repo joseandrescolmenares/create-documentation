@@ -2,7 +2,7 @@
 
 Bienvenido a **Documentación de Repositorios**, la herramienta definitiva para generar documentación precisa y completa para tus proyectos de código. Simplifica el acceso y la comprensión de tus repositorios con nuestra solución automatizada.
 
-![landing]("./public/demo.png")
+![landing](./public/demo.png)
 
 [demo](https://www.youtube.com/watch?v=jORQryYVnRs) 
 
