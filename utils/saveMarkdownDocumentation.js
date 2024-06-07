@@ -7,8 +7,6 @@ async function generateDocumentation(userId, repo) {
 
   const documentationResponse = await callLLM(generateDocumentationPrompt(repo));
 
-  console.log(documentationResponse,"generated documentation")
-
   const documentation = JSON.parse(documentationResponse);
 
   const metaResponse = await callLLM(generateMetaPrompt(documentation));
