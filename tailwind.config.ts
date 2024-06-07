@@ -23,6 +23,7 @@ module.exports = {
       },
 
       keyframes: {
+    
         shimmer: {
           from: {
             backgroundPosition: "0 0",
