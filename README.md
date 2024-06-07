@@ -2,7 +2,6 @@
 
 Bienvenido a **Documentación de Repositorios**, la herramienta definitiva para generar documentación precisa y completa para tus proyectos de código. Simplifica el acceso y la comprensión de tus repositorios con nuestra solución automatizada.
 
-[![Video de Introducción](https://via.placeholder.com/150)](https://drive.google.com/file/d/19FpRNve1GoSFxo10RI32DRvCWvj6q7Ol/view?usp=sharing)
 
 ## Características
 
