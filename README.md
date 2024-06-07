@@ -2,7 +2,6 @@
 
 Bienvenido a **Documentación de Repositorios**, la herramienta definitiva para generar documentación precisa y completa para tus proyectos de código. Simplifica el acceso y la comprensión de tus repositorios con nuestra solución automatizada.
 
-
 ## Características
 
 - **Generación Automática**: Transforma tus repositorios de código en documentación clara y accesible en minutos.
