@@ -24,8 +24,8 @@ Sigue estos pasos para instalar y configurar la herramienta en tu entorno local:
 
 1 .env enviroment :
 
-  OPENAI_API_KEY=""
-  API_KEY_GEMINIC=""  
+  	OPENAI_API_KEY=""
+  	API_KEY_GEMINIC=""  
 
 2. Clona este repositorio:
    ```sh
