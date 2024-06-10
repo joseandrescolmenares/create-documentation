@@ -6,6 +6,7 @@ import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { Boxes } from "./components/ui/background-boxes";
 import { useRouter } from "next/navigation";
+import { Loader } from "./components/ui/loader";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
 
@@ -15,7 +16,8 @@ export default function Home() {
   const router = useRouter();
 
   const isValidGitHubUrl = (url: string) => {
-    const githubUrlPattern = /^https:\/\/github.com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+\/?$/;
+    const githubUrlPattern =
+      /^https:\/\/github.com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+\/?$/;
     return githubUrlPattern.test(url);
   };
 
@@ -38,7 +40,6 @@ export default function Home() {
 
       if (result.status === 200) {
         router.push(`/docs/docs_${data?.userId}`);
-        
       }
     } catch (error) {
       console.error("Error generating documentation:", error);
@@ -71,15 +72,7 @@ export default function Home() {
               </div>
               <div className="space-x-2 gap-2 relative flex justify-center">
                 {isLoading ? (
-                  <div className="loader">
-                    <div className="loader-square"></div>
-                    <div className="loader-square"></div>
-                    <div className="loader-square"></div>
-                    <div className="loader-square"></div>
-                    <div className="loader-square"></div>
-                    <div className="loader-square"></div>
-                    <div className="loader-square"></div>
-                  </div>
+                  <Loader />
                 ) : (
                   <>
                     <Input
@@ -212,4 +205,3 @@ function PuzzleIcon(props) {
     </svg>
   );
 }
-
