@@ -1,19 +1,30 @@
 const fs = require('fs');
 const path = require('path');
 const { callLLM } = require('./ai');
-const { generateDocumentationPrompt, generateMetaPrompt } = require("./promps.js")
+const { generateDocumentationPrompt, generateMetaPrompt } = require("./promps.js");
 
 async function generateDocumentation(userId, repo) {
 
   const documentationResponse = await callLLM(generateDocumentationPrompt(repo));
-
   const documentation = JSON.parse(documentationResponse);
 
   const metaResponse = await callLLM(generateMetaPrompt(documentation));
   const metaConfig = JSON.parse(metaResponse);
 
+  const pagesDir = path.join(process.cwd(), 'pages');
+  const docsDir = path.join(process.cwd(), 'docs');
   const userDocsDir = path.join(process.cwd(), 'pages/docs', `docs_${userId}`);
 
+  // Ensure the pages and docs directories exist
+  if (!fs.existsSync(pagesDir)) {
+    fs.mkdirSync(pagesDir, { recursive: true });
+  }
+  
+  if (!fs.existsSync(docsDir)) {
+    fs.mkdirSync(docsDir, { recursive: true });
+  }
+
+  // Ensure the user-specific documentation directory exists
   if (!fs.existsSync(userDocsDir)) {
     fs.mkdirSync(userDocsDir, { recursive: true });
   }
@@ -39,8 +50,8 @@ async function generateDocumentation(userId, repo) {
 
   saveMarkdownFiles(userDocsDir, documentation);
 
-  // const metaPath = path.join(userDocsDir, '_meta.json');
-  // fs.writeFileSync(metaPath, JSON.stringify(metaConfig, null, 2));
+  const metaPath = path.join(userDocsDir, '_meta.json');
+  fs.writeFileSync(metaPath, JSON.stringify(metaConfig, null, 2));
 
   const indexFilePath = path.join(userDocsDir, 'index.mdx');
   if (!fs.existsSync(indexFilePath)) {
