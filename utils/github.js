@@ -21,14 +21,18 @@ export async function scrapingGithub(url) {
         "node_modules",
         "package.json",
         "*.svg",
-        "*jpg",
+        "*.jpg",
         "next/core-web-vitals",
         ".eslintrc.json",
         "components.json",
         "database.types.ts",
         "next.config.js",
-        "tsconfig.json"
-        
+        "tsconfig.json",
+        "postcss.config.ts",
+        "tailwind.config.ts",
+        "vite.config.ts",
+        "next.config.ts",
+        "globals.css"
       ],
     });
 
@@ -46,21 +50,17 @@ export async function scrapingGithub(url) {
     }
 
     const genAI = new GoogleGenerativeAI(process.env.API_KEY_GEMINIC);
-
-
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const result = await model.generateContent(scrapingGithubPrompt(repo));
     const text = result.response.text();
 
-    return text;
+    return { status: 200, data: text };
   } catch (error) {
     console.error("Error:", error);
-    return (
-      JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-      }
-    );
+    return {
+      status: 500,
+      error: error.message,
+    };
   }
 }

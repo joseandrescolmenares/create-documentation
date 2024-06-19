@@ -8,8 +8,8 @@ async function generateDocumentation(userId, repo) {
   const documentationResponse = await callLLM(generateDocumentationPrompt(repo));
   const documentation = JSON.parse(documentationResponse);
 
-  const metaResponse = await callLLM(generateMetaPrompt(documentation));
-  const metaConfig = JSON.parse(metaResponse);
+  // const metaResponse = await callLLM(generateMetaPrompt(documentation));
+  // const metaConfig = JSON.parse(metaResponse);
 
   const pagesDir = path.join(process.cwd(), 'pages');
   const docsDir = path.join(process.cwd(), 'docs');
@@ -50,8 +50,8 @@ async function generateDocumentation(userId, repo) {
 
   saveMarkdownFiles(userDocsDir, documentation);
 
-  const metaPath = path.join(userDocsDir, '_meta.json');
-  fs.writeFileSync(metaPath, JSON.stringify(metaConfig, null, 2));
+  // const metaPath = path.join(userDocsDir, '_meta.json');
+  // fs.writeFileSync(metaPath, JSON.stringify(metaConfig, null, 2));
 
   const indexFilePath = path.join(userDocsDir, 'index.mdx');
   if (!fs.existsSync(indexFilePath)) {

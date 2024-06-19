@@ -16,12 +16,12 @@ export async function callLLM(prompt) {
       model: "gpt-4o",
       response_format: { type: "json_object" },
     });
-    console.log(completion.choices[0].message.content, "RESPONSE LLM")
+ 
     return completion.choices[0].message.content;
 
 
   } catch (error) {
-    console.error("Error al llamar a la API de OpenAI:", error);
+    console.error("Error calling the OpenAI API:", error);
     throw error;
   }
 }
